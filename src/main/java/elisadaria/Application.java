@@ -5,8 +5,6 @@ import elisadaria.entities.Book;
 import elisadaria.entities.Magazine;
 import elisadaria.enums.Genres;
 import elisadaria.enums.TypeOfMag;
-
-
 import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -45,6 +43,12 @@ public class Application {
         } catch (Magazine.MagNotFoundException e) {
             throw new RuntimeException(e);
         }
+        try {
+            Magazine.searchByISBN(magazines,"102").forEach(mag-> System.out.println(mag));
+        } catch (Magazine.MagNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        Magazine.searchByPublicationYear(magazines,2005);
 
         Book.addNewBook(books, faker.hitchhikersGuideToTheGalaxy().marvinQuote(),"Douglas Adams",Genres.SCI_FI);
         String authorToSearch = "Douglas Adams";
@@ -55,6 +59,12 @@ public class Application {
         } catch (Book.BookNotFoundException e) {
             throw new RuntimeException(e);
         }
+        try {
+            Book.searchByISBN(books, "203");
+        } catch (Book.BookNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        Book.searchByPublicationYear(books,1997);
 
     }
 

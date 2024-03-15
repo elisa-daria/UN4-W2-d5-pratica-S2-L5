@@ -61,4 +61,18 @@ public class Book extends LibraryElement {
             super(message);
         }
     }
+    public static Set<Book> searchByISBN(Set<Book> books, String isbnToSearch) throws BookNotFoundException {
+        try {
+            return books.stream()
+                    .filter(book -> book.getCodeISBN().equals(isbnToSearch))
+                    .collect(Collectors.toSet());
+        } catch (Exception ex) {
+            throw new BookNotFoundException(ex.getMessage());
+        }
+    }
+    public static Set<Book> searchByPublicationYear(Set<Book> books, int yearToSearch) {
+        return books.stream()
+                .filter(book -> book.getYearOfPublication() == yearToSearch)
+                .collect(Collectors.toSet());
+    }
 }

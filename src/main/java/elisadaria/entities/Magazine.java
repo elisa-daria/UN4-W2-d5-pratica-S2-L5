@@ -5,6 +5,7 @@ import elisadaria.enums.TypeOfMag;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 public class Magazine extends LibraryElement {
@@ -33,7 +34,7 @@ public class Magazine extends LibraryElement {
     }
 
     public static void removeMagByISBN(List<Magazine> magazines, String isbnToRemove)throws Magazine.MagNotFoundException  {
-        boolean removed= magazines.removeIf(book -> book.getCodeISBN().equals(isbnToRemove));
+        boolean removed= magazines.removeIf(mag -> mag.getCodeISBN().equals(isbnToRemove));
         if(!removed){
             throw new Magazine.MagNotFoundException("Non esiste nessun magazines con questo ISBN: " + isbnToRemove);
         }
@@ -43,5 +44,19 @@ public class Magazine extends LibraryElement {
         public MagNotFoundException(String message) {
             super(message);
         }
+    }
+    public static Set<Magazine> searchByISBN(List<Magazine> magazines, String isbnToSearch) throws Magazine.MagNotFoundException {
+        try {
+            return magazines.stream()
+                    .filter(mag -> mag.getCodeISBN().equals(isbnToSearch))
+                    .collect(Collectors.toSet());
+        } catch (Exception ex) {
+            throw new Magazine.MagNotFoundException(ex.getMessage());
+        }
+    }
+    public static Set<Magazine> searchByPublicationYear(List<Magazine> magazines, int yearToSearch) {
+        return magazines.stream()
+                .filter(book -> book.getYearOfPublication() == yearToSearch)
+                .collect(Collectors.toSet());
     }
 }
