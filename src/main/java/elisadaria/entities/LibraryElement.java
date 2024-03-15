@@ -1,5 +1,6 @@
 package elisadaria.entities;
 
+import java.util.List;
 import java.util.Random;
 
 
@@ -69,8 +70,5 @@ abstract class LibraryElement {
                 '}';
     }
 
-    //addNewElement method
-    public void addNewElement(<Book>){
 
-    }
 }
