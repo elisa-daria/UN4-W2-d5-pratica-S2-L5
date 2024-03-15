@@ -5,6 +5,11 @@ import elisadaria.entities.Book;
 import elisadaria.entities.Magazine;
 import elisadaria.enums.Genres;
 import elisadaria.enums.TypeOfMag;
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -31,11 +36,7 @@ public class Application {
             magazines.add(buffySupplier.get());
         }
         magazines.stream().toList().forEach(mag -> System.out.println(mag));
-        List library= new ArrayList<>();
-        library.addAll(books);
-        library.addAll(magazines);
-        System.out.println("*******************LIBRARY*****************");
-        System.out.println(library);
+
 
         Magazine.addNewMag(magazines,faker.rockBand().name(),TypeOfMag.MENSILE);
         try {
@@ -66,6 +67,23 @@ public class Application {
         }
         Book.searchByPublicationYear(books,1997);
 
+        List library= new ArrayList<>();
+        library.addAll(books);
+        library.addAll(magazines);
+        System.out.println("*******************LIBRARY*****************");
+        System.out.println(library);
+
+
+        File libraryFile=new File("src/myLibrary.txt");
+        try {
+            FileUtils.writeStringToFile(libraryFile,library.toString()+System.lineSeparator(), StandardCharsets.UTF_8,true);
+            System.out.println("Saved");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
+
 
 }
