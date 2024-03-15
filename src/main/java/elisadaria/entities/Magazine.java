@@ -7,8 +7,8 @@ public class Magazine extends LibraryElement {
     //attributes
     private TypeOfMag type;
     //constructor
-    public Magazine(TypeOfMag type) {
-        super();
+    public Magazine(String title,TypeOfMag type) {
+        super(title);
         this.setType(type);
     }
     //getter

@@ -8,8 +8,8 @@ public class Book extends LibraryElement{
     private Genres genre;
 
     //constructor
-    public Book(String author, Genres genre) {
-        super();
+    public Book(String title,String author, Genres genre) {
+        super(title);
         this.setAuthor(author);
         this.setGenre(genre);
     }

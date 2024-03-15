@@ -2,6 +2,7 @@ package elisadaria.entities;
 
 import java.util.Random;
 
+
 abstract class LibraryElement {
     //attributes
     private long codeISBN;
@@ -11,10 +12,10 @@ abstract class LibraryElement {
 
     //constructor
 
-    public LibraryElement() {
+    public LibraryElement(String title) {
         this.setCodeISBN();
         this.setTitle(title);
-        this.yearOfPublication = yearOfPublication;
+        this.setYearOfPublication();
         this.setNumberOfPages();
     }
 
@@ -48,12 +49,12 @@ abstract class LibraryElement {
         this.title = title;
     }
 
-    public void setYearOfPublication(int yearOfPublication) {
-        this.yearOfPublication = yearOfPublication;
+    public void setYearOfPublication() {
+        this.yearOfPublication = rdm.nextInt(1997,2020);
     }
 
     public void setNumberOfPages() {
-        this.numberOfPages = rdm.nextInt(1,865);
+        this.numberOfPages = rdm.nextInt(50,865);
     }
 
     //methods
@@ -66,5 +67,10 @@ abstract class LibraryElement {
                 ", yearOfPublication=" + yearOfPublication +
                 ", numberOfPages=" + numberOfPages +
                 '}';
+    }
+
+    //addNewElement method
+    public void addNewElement(<Book>){
+
     }
 }

@@ -6,22 +6,31 @@ import elisadaria.entities.Magazine;
 import elisadaria.enums.Genres;
 import elisadaria.enums.TypeOfMag;
 
-import java.util.Locale;
+
+import java.util.*;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class Application {
+   static Faker faker=new Faker(Locale.ENGLISH);
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-        Faker faker=new Faker(Locale.ITALY);
+        Supplier<Book>hpSupplier=()->{
+            return new Book(faker.harryPotter().book(),"JKR",Genres.FANTASY);
+        };
+        Set<Book> hpSet=new HashSet<>();
+        for(int i= 0;i<=7;i++){
+            hpSet.add(hpSupplier.get());
+        }
+        hpSet.stream().collect(Collectors.toSet()).forEach(book -> System.out.println(book));
 
-        System.out.println(faker.backToTheFuture().character());
-        Book bookA=new Book("JKR", Genres.FANTASY);
-        bookA.setTitle(faker.harryPotter().book());
-        System.out.println(bookA.getTitle());
-        System.out.println(bookA.getCodeISBN());
-        System.out.println(bookA.toString());
-        Magazine vogue=new Magazine(TypeOfMag.MENSILE);
-        vogue.setTitle(faker.buffy().quotes());
-        System.out.println(vogue.toString());
+        Supplier<Magazine>buffySupplier=()->{
+            return new Magazine(faker.buffy().quotes(),TypeOfMag.SETTIMANALE);
+        };
+        List<Magazine>buffyComics=new ArrayList<>();
+        for (int i=0; i<12;i++){
+            buffyComics.add(buffySupplier.get());
+        }
+        buffyComics.stream().toList().forEach(mag -> System.out.println(mag));
     }
 }
