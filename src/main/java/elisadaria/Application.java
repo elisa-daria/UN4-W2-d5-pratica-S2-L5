@@ -40,11 +40,21 @@ public class Application {
         System.out.println(library);
 
         Magazine.addNewMag(magazines,faker.rockBand().name(),TypeOfMag.MENSILE);
+        try {
+            Magazine.removeMagByISBN(magazines,"702");
+        } catch (Magazine.MagNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
-       Book.addNewBook(books, faker.hitchhikersGuideToTheGalaxy().marvinQuote(),"Douglas Adams",Genres.SCI_FI);
+        Book.addNewBook(books, faker.hitchhikersGuideToTheGalaxy().marvinQuote(),"Douglas Adams",Genres.SCI_FI);
         String authorToSearch = "Douglas Adams";
         Set<Book> booksByAuthor = Book.searchByAuthor(books, authorToSearch);
         System.out.println(booksByAuthor);
+        try {
+            Book.removeBookByISBN(books,"788");
+        } catch (Book.BookNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 

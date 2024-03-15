@@ -1,12 +1,11 @@
 package elisadaria.entities;
 
-import java.util.List;
 import java.util.Random;
 
 
 abstract class LibraryElement {
     //attributes
-    private long codeISBN;
+    private String codeISBN;
     private String title;
     private int yearOfPublication;
     private int numberOfPages;
@@ -22,7 +21,7 @@ abstract class LibraryElement {
 
     //getters
 
-    public long getCodeISBN() {
+    public String getCodeISBN() {
         return codeISBN;
     }
 
@@ -43,7 +42,7 @@ abstract class LibraryElement {
     Random rdm=new Random();
 
     public void setCodeISBN() {
-        this.codeISBN = rdm.nextInt(1,1001);
+        this.codeISBN = String.valueOf(rdm.nextInt(1,1001));
     }
 
     public void setTitle(String title) {
